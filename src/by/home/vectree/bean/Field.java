@@ -1,5 +1,7 @@
 package by.home.vectree.bean;
 
+import by.home.vectree.exception.NotRectangleFieldException;
+
 import java.util.Arrays;
 
 public class Field {
@@ -19,6 +21,17 @@ public class Field {
         else if (size == 0) size = 10;
         this.cells = new Cell[size][size];
         fillField(this.cells);
+    }
+
+    public Field(Cell[][] cells) throws NotRectangleFieldException {
+        int lineLength = cells.length;
+        int columnLenth = cells[0].length;
+        for (int j = 1 ; j < cells.length; j++){
+            if (columnLenth != cells[j].length){
+                throw new NotRectangleFieldException("You try sent a not rectangle matrix");
+            }
+        }
+        this.cells = cells;
     }
 
     /**
@@ -44,8 +57,8 @@ public class Field {
     public void oneLifeCycle(){
         //создадим копию массива на основе имеющегося
         this.bufferCells = clone2DArray(this.cells);
-        for (int i = 0; i < this.cells.length - 1; i++){
-            for (int j = 0; j < this.cells[0].length - 1; j++){
+        for (int i = 0; i < this.cells.length ; i++){
+            for (int j = 0; j < this.cells[0].length ; j++){
                 this.cells[i][j] = futureLiveCell(this.bufferCells[i][j]);
             }
         }
