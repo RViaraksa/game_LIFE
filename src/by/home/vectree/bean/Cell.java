@@ -10,6 +10,12 @@ public class Cell {
         this.column = column;
     }
 
+    Cell(Cell cell){
+        this.line = cell.getLine();
+        this.column = cell.getColumn();
+        this.isLive = cell.isLive();
+    }
+
     public boolean isLive() {
         return isLive;
     }
@@ -56,6 +62,9 @@ public class Cell {
 
     @Override
     public String toString() {
-        return String.valueOf(isLive);
+       String ret;
+       if (isLive) ret = "*";
+       else ret = "_";
+       return ret;
     }
 }
