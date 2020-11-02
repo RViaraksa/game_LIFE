@@ -186,6 +186,10 @@ public class Field {
         return isLive;
     }
 
+    public Cell getCellByNumber(int line, int column){
+        return this.cells[line][column];
+    }
+
     public Cell[][] getCells() {
         return cells;
     }
